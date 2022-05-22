@@ -80,7 +80,6 @@
   <ItemGroup>
     <Compile Include="AdminUser.cs" />
     <Compile Include="BookingStatus.cs" />
-    <Compile Include="HotelManagementUser.cs" />
     <Compile Include="Payments.cs" />
     <Compile Include="PaymentType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

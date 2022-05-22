@@ -169,6 +169,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Dashborad\Controllers\BookingStatusController.cs" />
+    <Compile Include="Areas\Dashborad\Controllers\PaymentTypesController.cs" />
     <Compile Include="Areas\Dashborad\Controllers\RoomTypesController.cs" />
     <Compile Include="Areas\Dashborad\DashboradAreaRegistration.cs" />
     <Compile Include="Areas\Dashborad\ViewModel\RoomTypeViewModel.cs" />
@@ -245,6 +246,11 @@
     <Content Include="Areas\Dashborad\Views\BookingStatus\Index.cshtml" />
     <Content Include="Areas\Dashborad\Views\BookingStatus\_Action.cshtml" />
     <Content Include="Areas\Dashborad\Views\BookingStatus\_Delete.cshtml" />
+    <Content Include="Areas\Dashborad\Views\PaymentTypes\Create.cshtml" />
+    <Content Include="Areas\Dashborad\Views\PaymentTypes\Delete.cshtml" />
+    <Content Include="Areas\Dashborad\Views\PaymentTypes\Details.cshtml" />
+    <Content Include="Areas\Dashborad\Views\PaymentTypes\Edit.cshtml" />
+    <Content Include="Areas\Dashborad\Views\PaymentTypes\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
