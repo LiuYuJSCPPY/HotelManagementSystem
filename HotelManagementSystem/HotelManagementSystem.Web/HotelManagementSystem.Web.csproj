@@ -168,6 +168,9 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Dashborad\Controllers\RoomTypesController.cs" />
+    <Compile Include="Areas\Dashborad\DashboradAreaRegistration.cs" />
+    <Compile Include="Areas\Dashborad\ViewModel\RoomTypeViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -232,6 +235,15 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Areas\Dashborad\Views\web.config" />
+    <Content Include="Areas\Dashborad\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Dashborad\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Dashborad\Views\RoomTypes\Create.cshtml" />
+    <Content Include="Areas\Dashborad\Views\RoomTypes\Delete.cshtml" />
+    <Content Include="Areas\Dashborad\Views\RoomTypes\Details.cshtml" />
+    <Content Include="Areas\Dashborad\Views\RoomTypes\Edit.cshtml" />
+    <Content Include="Areas\Dashborad\Views\RoomTypes\Index.cshtml" />
+    <Content Include="Areas\Dashborad\Views\RoomTypes\_Action.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -284,6 +296,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Dashborad\Data\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

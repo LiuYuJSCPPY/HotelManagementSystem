@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HotelManagementSystem.Model
 {
-    [Table("dbo",Schema ="RoomTypes")]
+    [Table("RoomTypes", Schema = "dbo")]
     public class RoomTypes
     {
         public int Id { get; set; }
@@ -17,6 +17,6 @@ namespace HotelManagementSystem.Model
         [Required(ErrorMessage ="請務必填寫")]
         public string RoomType { get; set; }
 
-        public virtual ICollection<RoomTypes> roomTypes { get; set; }
+        public virtual ICollection<Rooms> rooms { get; set; }
     }
 }

@@ -11,8 +11,13 @@ namespace HotelManagementSystem.Data
 {
     public class HotelManagementSystemContext : IdentityDbContext<AdminUser>
     {
-        public HotelManagementSystemContext():base("name = HotelManagementSystemContext") {
+        public HotelManagementSystemContext():base("name =HotelManagementSystemContext") {
         
+        }
+
+        public static HotelManagementSystemContext Create()
+       {
+            return new HotelManagementSystemContext ();
         }
 
         public DbSet<BookingStatus> bookingStatuses { get; set; }

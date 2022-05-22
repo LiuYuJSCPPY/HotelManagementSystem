@@ -1,0 +1,62 @@
+﻿@model HotelManagementSystem.Model.RoomTypes
+@{
+    ViewBag.Title = "_Action";
+}
+
+<h2>_Action</h2>
+@if (Model != null) { 
+ <div class="modal-content">
+     <div class="modal-header">
+         @if (Model.Id > 0)
+         {
+             <h5 class="modal-title" id="exampleModalLabel">更新房間分類</h5>
+          }
+          else
+          {
+            <h5 class="modal-title" id="exampleModalLabel">新增房間分類</h5>
+           }
+         
+         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+     </div>
+    <div class="modal-body">
+        <form>
+            <input type="hidden" id="RooomTypeId" value="@Model.Id">
+            @Html.LabelFor(p => p.RoomType, new { @class = "form-label" })
+            @Html.TextBoxFor(p => p.RoomType, new { @class = "form-control", value = Model.RoomType })
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+        <button id="DataBtn" type="button" class="btn btn-primary">儲存</button>
+    </div>
+</div>
+}
+
+
+
+<script>
+    $("#DataBtn").click(function () {
+
+        var formdata = new FormData();
+        var roomType = $("#RoomType").val();
+        var roomId = $("#RooomTypeId").val();
+        formdata.append("RoomType", roomType);
+        formdata.append("Id", roomId);
+
+        $.ajax({
+            url: "@Url.Action("Action", "RoomTypes")",
+            type: "post",
+            processData: false,
+            contentType: false,
+            data: formdata,
+        }).done(function (respone) {
+            debugger;
+            if (respone.Success) {
+                location.reload();
+            } else {
+                $("#error").html(respone.Message);
+            }
+        })
+    })
+</script>

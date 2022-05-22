@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HotelManagementSystem.Model
 {
-    [Table("dbo",Schema ="Rooms")]
+    [Table("Rooms",Schema ="dbo")]
     public class Rooms
     {
         public int Id { get; set; }

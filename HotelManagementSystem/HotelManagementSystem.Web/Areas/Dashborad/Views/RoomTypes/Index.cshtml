@@ -1,0 +1,66 @@
+﻿@model IEnumerable<HotelManagementSystem.Model.RoomTypes>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+<div class="container-fluid px-4">
+    <h1 class="mt-4">Static Navigation</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+        <li class="breadcrumb-item active">Static Navigation</li>
+    </ol>
+
+
+    <button id="ActionButton" data-herf="@Url.Action("Action","RoomTypes")" type="button" class="data-btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#Action">
+        新增
+    </button>
+
+    <div class="modal fade" id="Action" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            
+        </div>
+    </div>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RoomType)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoomType)
+                </td>
+                <td>
+                    <button id="ActionButton" data-herf="@Url.Action("Action", "RoomTypes", new {Id = item.Id })" type="button" class="data-btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#Action">
+                        更新
+                    </button>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <div style="height: 100vh"></div>
+    <div class="card mb-4"><div class="card-body">When scrolling, the navigation stays at the top of the page. This is the end of the static navigation demo.</div></div>
+</div>
+
+<script>
+    $(".data-btn").click(function () {
+        $.ajax({
+            url: $(this).attr("data-herf"),
+           
+        }).done(function (repsone) {
+            $("#Action .modal-dialog").html(repsone);
+        })
+    })
+
+</script>
