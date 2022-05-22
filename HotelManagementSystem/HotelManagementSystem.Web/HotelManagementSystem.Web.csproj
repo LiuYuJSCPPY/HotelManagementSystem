@@ -168,6 +168,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Dashborad\Controllers\BookingStatusController.cs" />
     <Compile Include="Areas\Dashborad\Controllers\RoomTypesController.cs" />
     <Compile Include="Areas\Dashborad\DashboradAreaRegistration.cs" />
     <Compile Include="Areas\Dashborad\ViewModel\RoomTypeViewModel.cs" />
@@ -238,13 +239,12 @@
     <Content Include="Areas\Dashborad\Views\web.config" />
     <Content Include="Areas\Dashborad\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Dashborad\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Dashborad\Views\RoomTypes\Create.cshtml" />
-    <Content Include="Areas\Dashborad\Views\RoomTypes\Delete.cshtml" />
-    <Content Include="Areas\Dashborad\Views\RoomTypes\Details.cshtml" />
-    <Content Include="Areas\Dashborad\Views\RoomTypes\Edit.cshtml" />
     <Content Include="Areas\Dashborad\Views\RoomTypes\Index.cshtml" />
     <Content Include="Areas\Dashborad\Views\RoomTypes\_Action.cshtml" />
     <Content Include="Areas\Dashborad\Views\RoomTypes\_Delete.cshtml" />
+    <Content Include="Areas\Dashborad\Views\BookingStatus\Index.cshtml" />
+    <Content Include="Areas\Dashborad\Views\BookingStatus\_Action.cshtml" />
+    <Content Include="Areas\Dashborad\Views\BookingStatus\_Delete.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

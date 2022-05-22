@@ -1,9 +1,4 @@
-﻿@model IEnumerable<HotelManagementSystem.Model.RoomTypes>
-
-@{
-    ViewBag.Title = "Index";
-}
-
+﻿@model IEnumerable<HotelManagementSystem.Model.BookingStatus>
 
 
 <div class="container-fluid px-4">
@@ -14,20 +9,20 @@
     </ol>
 
 
-    <button id="ActionButton" data-herf="@Url.Action("Action","RoomTypes")" type="button" class="data-btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#Action">
+    <button id="ActionButton" data-herf="@Url.Action("Action","BookingStatus")" type="button" class="data-btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#Action">
         新增
     </button>
 
     <div class="modal fade" id="Action" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            
+
         </div>
     </div>
 
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.RoomType)
+                @Html.DisplayNameFor(model => model.BookingStatusName)
             </th>
             <th></th>
         </tr>
@@ -36,17 +31,16 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.RoomType)
+                    @Html.DisplayFor(modelItem => item.BookingStatusName)
                 </td>
                 <td>
-                    <button id="ActionButton" data-herf="@Url.Action("Action", "RoomTypes", new {Id = item.Id })" type="button" class="data-btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#Action">
+                    <button id="ActionButton" data-herf="@Url.Action("Action", "BookingStatus", new {Id = item.Id })" type="button" class="data-btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#Action">
                         更新
                     </button>
-                    <button id="ActionButton" data-herf="@Url.Action("Delete", "RoomTypes", new {Id = item.Id })" type="button" class="data-btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#Action">
+                    <button id="ActionButton" data-herf="@Url.Action("Delete", "BookingStatus", new {Id = item.Id })" type="button" class="data-btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#Action">
                         刪除
                     </button>
                    
-                </td>
             </tr>
         }
 
@@ -60,7 +54,7 @@
     $(".data-btn").click(function () {
         $.ajax({
             url: $(this).attr("data-herf"),
-           
+
         }).done(function (repsone) {
             $("#Action .modal-dialog").html(repsone);
         })

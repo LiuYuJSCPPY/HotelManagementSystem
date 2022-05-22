@@ -1,0 +1,61 @@
+﻿@model HotelManagementSystem.Model.BookingStatus
+
+@if (Model != null)
+{
+    <div class="modal-content">
+        <div class="modal-header">
+            @if (Model.Id > 0)
+            {
+                <h5 class="modal-title" id="exampleModalLabel">更新預定狀態</h5>
+            }
+            else
+            {
+                <h5 class="modal-title" id="exampleModalLabel">新增預定狀態</h5>
+            }
+
+
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form id="ActionForm">
+                @Html.HiddenFor(p => p.Id)
+                @Html.LabelFor(p => p.BookingStatusName, new { @class = "form-label" })
+                @Html.TextBoxFor(p => p.BookingStatusName, new { @class = "form-control", value = Model.BookingStatusName })
+            </form>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+            <button id="DataBtn" type="button" class="btn btn-primary">儲存</button>
+        </div>
+    </div>
+
+
+    <div id="Error">
+
+    </div>
+}
+
+<script>
+    $("#DataBtn").click(function () {
+
+
+
+        $.ajax({
+            url: "@Url.Action("Action", "BookingStatus")",
+            type: "post",
+            data: $("#ActionForm").serialize(),
+        }).done(function (response) {
+            debugger;
+            if (response.Success) {
+                location.reload();
+            } else {
+                $("#Error").html(response.Messange);
+            }
+        });
+    })
+
+
+
+
+</script>
