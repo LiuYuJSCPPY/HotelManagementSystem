@@ -244,6 +244,7 @@
     <Content Include="Areas\Dashborad\Views\RoomTypes\Edit.cshtml" />
     <Content Include="Areas\Dashborad\Views\RoomTypes\Index.cshtml" />
     <Content Include="Areas\Dashborad\Views\RoomTypes\_Action.cshtml" />
+    <Content Include="Areas\Dashborad\Views\RoomTypes\_Delete.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

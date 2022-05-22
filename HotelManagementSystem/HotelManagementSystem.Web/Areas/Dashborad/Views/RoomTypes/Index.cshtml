@@ -42,6 +42,9 @@
                     <button id="ActionButton" data-herf="@Url.Action("Action", "RoomTypes", new {Id = item.Id })" type="button" class="data-btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#Action">
                         更新
                     </button>
+                    <button id="ActionButton" data-herf="@Url.Action("Delete", "RoomTypes", new {Id = item.Id })" type="button" class="data-btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#Action">
+                        刪除
+                    </button>
                     @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                 </td>
             </tr>

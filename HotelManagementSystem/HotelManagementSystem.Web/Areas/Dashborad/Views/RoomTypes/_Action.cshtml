@@ -1,9 +1,5 @@
 ﻿@model HotelManagementSystem.Model.RoomTypes
-@{
-    ViewBag.Title = "_Action";
-}
 
-<h2>_Action</h2>
 @if (Model != null) { 
  <div class="modal-content">
      <div class="modal-header">
@@ -33,7 +29,9 @@
 </div>
 }
 
+<div id="DeleteError">
 
+</div>
 
 <script>
     $("#DataBtn").click(function () {
