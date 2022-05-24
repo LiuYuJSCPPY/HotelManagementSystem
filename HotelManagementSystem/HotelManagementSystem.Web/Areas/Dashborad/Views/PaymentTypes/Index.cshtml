@@ -4,30 +4,66 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<div class="container-fluid px-4">
+    <h1 class="mt-4">Static Navigation</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+        <li class="breadcrumb-item active">Static Navigation</li>
+    </ol>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.PaymentTypeName)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.PaymentTypeName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    <button id="ActionButton" data-herf="@Url.Action("Action","PaymentTypes")" type="button" class="data-btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#Action">
+        新增
+    </button>
 
-</table>
+    <div class="modal fade" id="Action" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+
+        </div>
+    </div>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PaymentTypeName)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PaymentTypeName)
+                </td>
+                <td>
+                    <button id="ActionButton" data-herf="@Url.Action("Action", "PaymentTypes", new {Id = item.Id })" type="button" class="data-btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#Action">
+                        更新
+                    </button>
+                    <button id="ActionButton" data-herf="@Url.Action("Delete", "PaymentTypes", new {Id = item.Id })" type="button" class="data-btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#Action">
+                        刪除
+                    </button>
+
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <div style="height: 100vh"></div>
+    <div class="card mb-4"><div class="card-body">When scrolling, the navigation stays at the top of the page. This is the end of the static navigation demo.</div></div>
+</div>
+<script>
+
+
+    $(".data-btn").click(function () {
+        $.ajax({
+            url: $(this).attr("data-herf"),
+            type: "get"
+        }).done(function (respone) {
+            $("#Action .modal-dialog").html(respone)
+        })
+    });
+
+
+</script>

@@ -23,8 +23,49 @@ namespace HotelManagementSystem.Web.Areas.Dashborad.Controllers
 
 
 
-        public ActionResult Action()
+        public ActionResult Action(int? Id)
         {
+            PaymentType paymentType = new PaymentType();
+
+            if (Id.HasValue)
+            {
+                PaymentType EditPayMentType = db.paymentTypes.Find(Id);
+                paymentType.Id = Id.Value;
+                paymentType.PaymentTypeName = EditPayMentType.PaymentTypeName;
+            }
+
+            return PartialView("_Action", paymentType);
+        }
+
+
+        [HttpPost]
+        public JsonResult Action([Bind(Include = "Id,PaymentTypeName")] PaymentType paymentType)
+        {
+            JsonResult json = new JsonResult();
+            bool Result = false;
+
+            if (paymentType.Id > 0)
+            {
+                db.Entry(paymentType).State = EntityState.Modified;
+                Result = db.SaveChanges() > 0;
+            }
+            else
+            {
+                db.paymentTypes.Add(paymentType);
+                Result = db.SaveChanges() > 0;
+            }
+           
+
+            if (Result)
+            {
+                json.Data = new { Success = true };
+            }
+            else
+            {
+                json.Data = new { Success = false,Message = "失敗!" };
+            }
+
+            return json;
 
         }
         // GET: Dashborad/PaymentTypes/Details/5
