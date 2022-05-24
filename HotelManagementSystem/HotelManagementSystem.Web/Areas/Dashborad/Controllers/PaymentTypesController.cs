@@ -68,75 +68,7 @@ namespace HotelManagementSystem.Web.Areas.Dashborad.Controllers
             return json;
 
         }
-        // GET: Dashborad/PaymentTypes/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            PaymentType paymentType = db.paymentTypes.Find(id);
-            if (paymentType == null)
-            {
-                return HttpNotFound();
-            }
-            return View(paymentType);
-        }
-
-        // GET: Dashborad/PaymentTypes/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Dashborad/PaymentTypes/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,PaymentTypeName")] PaymentType paymentType)
-        {
-            if (ModelState.IsValid)
-            {
-                db.paymentTypes.Add(paymentType);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(paymentType);
-        }
-
-        // GET: Dashborad/PaymentTypes/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            PaymentType paymentType = db.paymentTypes.Find(id);
-            if (paymentType == null)
-            {
-                return HttpNotFound();
-            }
-            return View(paymentType);
-        }
-
-        // POST: Dashborad/PaymentTypes/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,PaymentTypeName")] PaymentType paymentType)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(paymentType).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(paymentType);
-        }
-
+       
         // GET: Dashborad/PaymentTypes/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -149,18 +81,31 @@ namespace HotelManagementSystem.Web.Areas.Dashborad.Controllers
             {
                 return HttpNotFound();
             }
-            return View(paymentType);
+            return PartialView("_Delete", paymentType);
         }
 
         // POST: Dashborad/PaymentTypes/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        [HttpPost]
+       
+        public JsonResult Delete(int id)
         {
+            JsonResult json = new JsonResult();
+            bool Result = false;
+            
             PaymentType paymentType = db.paymentTypes.Find(id);
             db.paymentTypes.Remove(paymentType);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            Result = db.SaveChanges()> 0;
+
+
+            if (Result)
+            {
+                json.Data = new { Success = true };
+            }
+            else
+            {
+                json.Data = new { Success = false, Message = "失敗!" };
+            }
+            return json;
         }
 
         protected override void Dispose(bool disposing)

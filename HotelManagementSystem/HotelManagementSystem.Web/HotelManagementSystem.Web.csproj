@@ -252,6 +252,7 @@
     <Content Include="Areas\Dashborad\Views\PaymentTypes\Edit.cshtml" />
     <Content Include="Areas\Dashborad\Views\PaymentTypes\Index.cshtml" />
     <Content Include="Areas\Dashborad\Views\PaymentTypes\_Action.cshtml" />
+    <Content Include="Areas\Dashborad\Views\PaymentTypes\_Delete.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
