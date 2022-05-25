@@ -1,51 +1,57 @@
 ﻿@model HotelManagementSystem.Web.Areas.Dashborad.ViewModel.RoomViewModel
-    ViewBag.Title = "_Action";
-}
 
+@if(Model != null){
 <div class="modal-content">
     <div class="modal-header">
-       
-        <h5 class="modal-title" id="exampleModalLabel">新增房間</h5>
-      
+        @if (Model.Id > 0)
+        {
+          <h5 class="modal-title" id="exampleModalLabel">更新房間</h5> 
+         }
+        else
+        {
+          <h5 class="modal-title" id="exampleModalLabel">新增房間</h5>
+        }
+
+
 
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
     <div class="modal-body">
         <form id="ActionForm">
-            <input type="hidden" id="RooomTypeId" value="">
+            <input type="hidden" id="RooomId" value="@Model.Id">
             @Html.LabelFor(p => p.RoomNumber, new { @class = "form-label" })
 
-            @Html.TextBoxFor(p => p.RoomNumber, new { @class = "form-control" })
+            @Html.TextBoxFor(p => p.RoomNumber, new { @class = "form-control", value = Model.RoomNumber })
 
             @Html.LabelFor(p => p.RoomPrice, new { @class = "form-label" })
 
-            @Html.TextBoxFor(p => p.RoomPrice, new { @class = "form-control" })
+            @Html.TextBoxFor(p => p.RoomPrice, new { @class = "form-control", value = Model.RoomPrice })
 
             @Html.LabelFor(p => p.BookingStatusId, new { @class = "form-label" })
 
-            @Html.DropDownListFor(p => p.BookingStatusId, Model.bookingStatus,  "==請遠擇==", new { @class = "form-control" })
+            @Html.DropDownListFor(p => p.BookingStatusId, Model.bookingStatus, "==請遠擇==", new { @class = "form-control", value = Model.BookingStatusId })
 
             @Html.LabelFor(p => p.RoomTypesId, new { @class = "form-label" })
 
-            @Html.DropDownListFor(p => p.RoomTypesId, Model.roomTypes, "==請遠擇==", new { @class = "form-control" })
+            @Html.DropDownListFor(p => p.RoomTypesId, Model.roomTypes, "==請遠擇==", new { @class = "form-control", value = Model.RoomTypesId })
 
             @Html.LabelFor(p => p.RoomCapacity, new { @class = "form-label" })
 
-            @Html.TextBoxFor(p => p.RoomCapacity, new { @class = "form-control" })
+            @Html.TextBoxFor(p => p.RoomCapacity, new { @class = "form-control", value = Model.RoomCapacity })
 
             @Html.LabelFor(p => p.RoomDescription, new { @class = "form-label" })
 
-            @Html.TextAreaFor(p => p.RoomDescription, new { @class = "form-control" })
-        <div class="form-check">
+            @Html.TextAreaFor(p => p.RoomDescription, new { @class = "form-control", value = Model.RoomDescription })
+            <div class="form-check">
             @Html.LabelFor(p => p.IsActive, new { @class = "form-label" })
 
-            @Html.CheckBoxFor(p => p.IsActive, new { @class = "form-check-input" })
-        </div>
+             @Html.CheckBoxFor(p => p.IsActive, new { @class = "form-check-input", value = Model.IsActive })
+            </div>
             @Html.LabelFor(p => p.RoomImage, new { @class = "form-label" })
 
             <input type="file" class="form-control" name="RoomViewImage" id="RoomFile">
             <img src="" id="RoomImageView">
-</form>
+        </form>
 
     </div>
     <div class="modal-footer">
@@ -53,6 +59,8 @@
         <button id="DataBtn" type="button" class="btn btn-primary">儲存</button>
     </div>
 </div>
+}
+
 
 <script>
 
@@ -72,8 +80,9 @@
     }
 
     $("#DataBtn").click(function () {
-
+       
         var DataFrom = new FormData();
+        var Id = $("#RooomId").val();
         var Number = $("#RoomNumber").val();
         var Price = $("#RoomPrice").val();
         var StatusId = $("#BookingStatusId").val();
@@ -83,6 +92,7 @@
         var IsActive = $("#IsActive").val();
         var file = $("#RoomFile")[0].files[0];
 
+        DataFrom.append("Id", Id);
         DataFrom.append("RoomNumber", Number);
         DataFrom.append("RoomPrice", Price);
         DataFrom.append("BookingStatusId", StatusId);
@@ -95,7 +105,7 @@
 
 
         $.ajax({
-            url: "@Url.Action("Action","Rooms")",
+            url: "@Url.Action("Action", "Rooms")",
             type: "post",
             processData: false,
             contentType: false,

@@ -27,15 +27,15 @@
     }
 
    
-    <div style="height: 100vh"></div>
-    <div class="card mb-4"><div class="card-body">When scrolling, the navigation stays at the top of the page. This is the end of the static navigation demo.</div></div>
+   
 </div>
 <script>
-    $("#ActionButton").click(function () {
+    $(".data-btn").click(function () {
         $.ajax({
-            url: "@Url.Action("Action","Rooms")",
+            url: $(this).attr("data-herf"),
             type: "get",
         }).done(function (respone) {
+            debugger;
             $("#Action .modal-dialog").html(respone);
         })
     })
