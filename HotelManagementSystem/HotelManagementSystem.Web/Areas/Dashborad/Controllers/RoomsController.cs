@@ -35,7 +35,7 @@ namespace HotelManagementSystem.Web.Areas.Dashborad.Controllers
         }
 
         [HttpPost]
-        public JsonResult Action(Rooms rooms,HttpPostedFileBase RoomImage)
+        public JsonResult Action([Bind(Include = "RoomNumber,RoomPrice,BookingStatusId,RoomTypesId,RoomCapacity,RoomDescription,IsActive,RoomViewImage")]Rooms rooms,HttpPostedFileBase RoomViewImage)
         {
             JsonResult json = new JsonResult();
             bool Result = false;
@@ -43,23 +43,24 @@ namespace HotelManagementSystem.Web.Areas.Dashborad.Controllers
           
 
 
-            string FilePath =Server.MapPath("~/Areas/Dashborad/Image/RoomImage/");
+            string FilePath = Server.MapPath("~/Areas/Dashborad/Image/RoomImage/");
 
             if (!Directory.Exists(FilePath))
             {
                 Directory.CreateDirectory(FilePath);
             }
 
-            string FileName = Path.GetFileName(RoomImage.FileName);
+            string FileName = Path.GetFileName(RoomViewImage.FileName);
             string _FileName = DateTime.Now.ToString("yyyymmssfff") + FileName;
-            string Exesption = Path.GetExtension(RoomImage.FileName);
+            string Exesption = Path.GetExtension(RoomViewImage.FileName);
             string path = Path.Combine(FilePath, _FileName);
 
             rooms.RoomImage = "~/Areas/Dashborad/Image/RoomImage/" + _FileName;
 
             if(Exesption.ToLower() == ".jpg" || Exesption.ToLower() == ".jepg" || Exesption.ToLower() == ".png")
             {
-                RoomImage.SaveAs(path);
+                RoomViewImage.SaveAs(path);
+                db.rooms.Add(rooms);
                 Result = db.SaveChanges() > 0;
             }
 

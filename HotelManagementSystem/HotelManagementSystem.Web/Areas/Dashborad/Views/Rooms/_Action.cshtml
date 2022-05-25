@@ -11,7 +11,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
     <div class="modal-body">
-        <form>
+        <form id="ActionForm">
             <input type="hidden" id="RooomTypeId" value="">
             @Html.LabelFor(p => p.RoomNumber, new { @class = "form-label" })
 
@@ -23,11 +23,11 @@
 
             @Html.LabelFor(p => p.BookingStatusId, new { @class = "form-label" })
 
-            @Html.DropDownListFor(p => p.BookingStatusId, Model.bookingStatus, new { @class = "form-control" })
+            @Html.DropDownListFor(p => p.BookingStatusId, Model.bookingStatus,  "==請遠擇==", new { @class = "form-control" })
 
             @Html.LabelFor(p => p.RoomTypesId, new { @class = "form-label" })
 
-            @Html.DropDownListFor(p => p.RoomTypesId, Model.roomTypes, new { @class = "form-control" })
+            @Html.DropDownListFor(p => p.RoomTypesId, Model.roomTypes, "==請遠擇==", new { @class = "form-control" })
 
             @Html.LabelFor(p => p.RoomCapacity, new { @class = "form-label" })
 
@@ -43,7 +43,7 @@
         </div>
             @Html.LabelFor(p => p.RoomImage, new { @class = "form-label" })
 
-            <input type="file" class="form-control" name="RoomImage" id="RoomImage">
+            <input type="file" class="form-control" name="RoomViewImage" id="RoomFile">
             <img src="" id="RoomImageView">
 </form>
 
@@ -56,7 +56,7 @@
 
 <script>
 
-    $("#RoomImage").change(function () {
+    $("#RoomFile").change(function () {
         ReadUrl(this);
     })
 
@@ -71,7 +71,42 @@
 
     }
 
+    $("#DataBtn").click(function () {
 
+        var DataFrom = new FormData();
+        var Number = $("#RoomNumber").val();
+        var Price = $("#RoomPrice").val();
+        var StatusId = $("#BookingStatusId").val();
+        var TypesId = $("#RoomTypesId").val();
+        var RoomCapacity = $("#RoomCapacity").val();
+        var Description = $("#RoomDescription").val();
+        var IsActive = $("#IsActive").val();
+        var file = $("#RoomFile")[0].files[0];
+
+        DataFrom.append("RoomNumber", Number);
+        DataFrom.append("RoomPrice", Price);
+        DataFrom.append("BookingStatusId", StatusId);
+        DataFrom.append("RoomTypesId", TypesId);
+        DataFrom.append("RoomCapacity", RoomCapacity);
+        DataFrom.append("RoomDescription", Description);
+        DataFrom.append("IsActive", IsActive);
+        DataFrom.append("RoomViewImage", file);
+
+
+
+        $.ajax({
+            url: "@Url.Action("Action","Rooms")",
+            type: "post",
+            processData: false,
+            contentType: false,
+            data: DataFrom
+        }).done(function (respone) {
+            debugger;
+            if (respone.Success) {
+                location.reload();
+            } 
+        })
+    })
 
 
 
