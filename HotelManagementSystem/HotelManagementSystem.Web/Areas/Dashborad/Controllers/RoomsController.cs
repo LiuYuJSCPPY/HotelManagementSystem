@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using HotelManagementSystem.Data;
 using HotelManagementSystem.Model;
+using HotelManagementSystem.Web.Areas.Dashborad.ViewModel;
+using System.IO;
 
 namespace HotelManagementSystem.Web.Areas.Dashborad.Controllers
 {
@@ -22,6 +24,61 @@ namespace HotelManagementSystem.Web.Areas.Dashborad.Controllers
             return View(rooms.ToList());
         }
 
+
+        public ActionResult Action()
+        {
+            RoomViewModel RoomsModel =new RoomViewModel();
+            RoomsModel.bookingStatus = db.bookingStatuses.Select(booking => new SelectListItem { Text = booking.BookingStatusName, Value = booking.Id.ToString()}).ToList();
+
+            RoomsModel.roomTypes = db.roomTypes.Select(booking => new SelectListItem { Text = booking.RoomType, Value = booking.Id.ToString() }).ToList();
+            return PartialView("_Action", RoomsModel);
+        }
+
+        [HttpPost]
+        public JsonResult Action(Rooms rooms,HttpPostedFileBase RoomImage)
+        {
+            JsonResult json = new JsonResult();
+            bool Result = false;
+
+          
+
+
+            string FilePath =Server.MapPath("~/Areas/Dashborad/Image/RoomImage/");
+
+            if (!Directory.Exists(FilePath))
+            {
+                Directory.CreateDirectory(FilePath);
+            }
+
+            string FileName = Path.GetFileName(RoomImage.FileName);
+            string _FileName = DateTime.Now.ToString("yyyymmssfff") + FileName;
+            string Exesption = Path.GetExtension(RoomImage.FileName);
+            string path = Path.Combine(FilePath, _FileName);
+
+            rooms.RoomImage = "~/Areas/Dashborad/Image/RoomImage/" + _FileName;
+
+            if(Exesption.ToLower() == ".jpg" || Exesption.ToLower() == ".jepg" || Exesption.ToLower() == ".png")
+            {
+                RoomImage.SaveAs(path);
+                Result = db.SaveChanges() > 0;
+            }
+
+
+
+
+            if (Result)
+            {
+                json.Data = new { Success = true };
+            }
+            else
+            {
+                json.Data = new { Success = false,Message = "失敗!" };
+            }
+
+
+            return json;
+
+        }
         // GET: Dashborad/Rooms/Details/5
         public ActionResult Details(int? id)
         {

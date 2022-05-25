@@ -3,73 +3,40 @@
 @{
     ViewBag.Title = "Index";
 }
+<div class="container-fluid px-4">
+    <h1 class="mt-4">Static Navigation</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+        <li class="breadcrumb-item active">Static Navigation</li>
+    </ol>
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.bookingStatus.BookingStatusName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.roomTypes.RoomType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RoomNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RoomImage)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RoomPrice)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RoomCapacity)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RoomDescription)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsActive)
-        </th>
-        <th></th>
-    </tr>
+    <button id="ActionButton" data-herf="@Url.Action("Action","Rooms")" type="button" class="data-btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#Action">
+        新增
+    </button>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.bookingStatus.BookingStatusName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.roomTypes.RoomType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RoomNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RoomImage)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RoomPrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RoomCapacity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RoomDescription)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsActive)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    <div class="modal fade" id="Action" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
 
-</table>
+        </div>
+    </div>
+
+
+    @{ 
+        Html.RenderPartial("_Listing", Model);
+    }
+
+   
+    <div style="height: 100vh"></div>
+    <div class="card mb-4"><div class="card-body">When scrolling, the navigation stays at the top of the page. This is the end of the static navigation demo.</div></div>
+</div>
+<script>
+    $("#ActionButton").click(function () {
+        $.ajax({
+            url: "@Url.Action("Action","Rooms")",
+            type: "get",
+        }).done(function (respone) {
+            $("#Action .modal-dialog").html(respone);
+        })
+    })
+</script>

@@ -1,0 +1,78 @@
+﻿@model HotelManagementSystem.Web.Areas.Dashborad.ViewModel.RoomViewModel
+    ViewBag.Title = "_Action";
+}
+
+<div class="modal-content">
+    <div class="modal-header">
+       
+        <h5 class="modal-title" id="exampleModalLabel">新增房間</h5>
+      
+
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <input type="hidden" id="RooomTypeId" value="">
+            @Html.LabelFor(p => p.RoomNumber, new { @class = "form-label" })
+
+            @Html.TextBoxFor(p => p.RoomNumber, new { @class = "form-control" })
+
+            @Html.LabelFor(p => p.RoomPrice, new { @class = "form-label" })
+
+            @Html.TextBoxFor(p => p.RoomPrice, new { @class = "form-control" })
+
+            @Html.LabelFor(p => p.BookingStatusId, new { @class = "form-label" })
+
+            @Html.DropDownListFor(p => p.BookingStatusId, Model.bookingStatus, new { @class = "form-control" })
+
+            @Html.LabelFor(p => p.RoomTypesId, new { @class = "form-label" })
+
+            @Html.DropDownListFor(p => p.RoomTypesId, Model.roomTypes, new { @class = "form-control" })
+
+            @Html.LabelFor(p => p.RoomCapacity, new { @class = "form-label" })
+
+            @Html.TextBoxFor(p => p.RoomCapacity, new { @class = "form-control" })
+
+            @Html.LabelFor(p => p.RoomDescription, new { @class = "form-label" })
+
+            @Html.TextAreaFor(p => p.RoomDescription, new { @class = "form-control" })
+        <div class="form-check">
+            @Html.LabelFor(p => p.IsActive, new { @class = "form-label" })
+
+            @Html.CheckBoxFor(p => p.IsActive, new { @class = "form-check-input" })
+        </div>
+            @Html.LabelFor(p => p.RoomImage, new { @class = "form-label" })
+
+            <input type="file" class="form-control" name="RoomImage" id="RoomImage">
+            <img src="" id="RoomImageView">
+</form>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+        <button id="DataBtn" type="button" class="btn btn-primary">儲存</button>
+    </div>
+</div>
+
+<script>
+
+    $("#RoomImage").change(function () {
+        ReadUrl(this);
+    })
+
+    function ReadUrl(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $("#RoomImageView").attr("src", e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+
+    }
+
+
+
+
+
+</script>
