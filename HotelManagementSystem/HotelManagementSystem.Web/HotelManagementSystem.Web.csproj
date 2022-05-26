@@ -251,13 +251,10 @@
     <Content Include="Areas\Dashborad\Views\PaymentTypes\Index.cshtml" />
     <Content Include="Areas\Dashborad\Views\PaymentTypes\_Action.cshtml" />
     <Content Include="Areas\Dashborad\Views\PaymentTypes\_Delete.cshtml" />
-    <Content Include="Areas\Dashborad\Views\Rooms\Create.cshtml" />
-    <Content Include="Areas\Dashborad\Views\Rooms\Delete.cshtml" />
-    <Content Include="Areas\Dashborad\Views\Rooms\Details.cshtml" />
-    <Content Include="Areas\Dashborad\Views\Rooms\Edit.cshtml" />
     <Content Include="Areas\Dashborad\Views\Rooms\Index.cshtml" />
     <Content Include="Areas\Dashborad\Views\Rooms\_Action.cshtml" />
     <Content Include="Areas\Dashborad\Views\Rooms\_Listing.cshtml" />
+    <Content Include="Areas\Dashborad\Views\Rooms\_Delete.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
