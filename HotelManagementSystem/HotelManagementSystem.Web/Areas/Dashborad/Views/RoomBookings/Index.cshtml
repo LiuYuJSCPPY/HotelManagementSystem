@@ -1,0 +1,40 @@
+﻿@model IEnumerable<HotelManagementSystem.Model.RoomBookings>
+
+@{
+    ViewBag.Title = "Index";
+}
+<div class="container-fluid px-4">
+    <h1 class="mt-4">Static Navigation</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+        <li class="breadcrumb-item active">Static Navigation</li>
+    </ol>
+
+
+    <button id="ActionButton" data-herf="@Url.Action("Action","RoomsBooking")" type="button" class="data-btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#Action">
+        新增
+    </button>
+
+    <div class="modal fade" id="Action" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+
+        </div>
+    </div>
+
+@{ 
+    Html.RenderPartial("_Listing", Model);
+}
+
+
+</div>
+<script>
+    $(".data-btn").click(function () {
+        $.ajax({
+            url: $(this).attr("data-herf"),
+            type: "get",
+        }).done(function (respone) {
+            debugger;
+            $("#Action .modal-dialog").html(respone);
+        })
+    })
+</script>

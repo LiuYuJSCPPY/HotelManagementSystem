@@ -20,11 +20,13 @@ namespace HotelManagementSystem.Data
             return new HotelManagementSystemContext ();
         }
 
-        public DbSet<BookingStatus> bookingStatuses { get; set; }
-        public DbSet<Payments> payments { get; set; }
-        public DbSet<PaymentType> paymentTypes { get; set; }
-        public DbSet<RoomBookings> roomBookings { get; set; }
-        public DbSet<Rooms> rooms { get; set; }
-        public DbSet<RoomTypes> roomTypes { get; set; }
+        public virtual DbSet<BookingStatus> bookingStatuses { get; set; }
+        public virtual DbSet<Payments> payments { get; set; }
+        public virtual DbSet<PaymentType> paymentTypes { get; set; }
+        public virtual DbSet<RoomBookings> roomBookings { get; set; }
+        public virtual DbSet<Rooms> rooms { get; set; }
+        public virtual DbSet<RoomTypes> roomTypes { get; set; }
+
+        
     }
 }

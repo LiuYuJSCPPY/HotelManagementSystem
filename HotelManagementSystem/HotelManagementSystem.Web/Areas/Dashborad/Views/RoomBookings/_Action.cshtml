@@ -1,0 +1,32 @@
+﻿@model HotelManagementSystem.Web.Areas.Dashborad.ViewModel.RoomBookingsViewModel
+
+<div class="modal-content">
+    <div class="modal-header">
+        @if (Model.Id > 0)
+        {
+            <h5 class="modal-title" id="exampleModalLabel">更新房間</h5>
+        }
+        else
+        {
+            <h5 class="modal-title" id="exampleModalLabel">新增房間</h5>
+        }
+
+
+
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <form id="ActionForm">
+            <input type="hidden" id="RooomId" value="@Model.Id">
+            @Html.LabelFor(p => p.CutomerName)
+            @Html.TextBoxFor(p => p.CutomerName)
+
+
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+        <button id="DataBtn" type="button" class="btn btn-primary">儲存</button>
+    </div>
+</div>
