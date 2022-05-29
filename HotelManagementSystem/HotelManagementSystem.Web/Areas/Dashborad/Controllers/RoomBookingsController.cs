@@ -25,12 +25,69 @@ namespace HotelManagementSystem.Web.Areas.Dashborad.Controllers
 
 
 
-        public ActionResult Action()
+        public ActionResult Action(int? Id)
         {
-            RoomBookings roombookings = new RoomBookings();
+            RoomBookingsViewModel roombookings = new RoomBookingsViewModel();
+            roombookings.rooms = db.rooms.Select(p => new SelectListItem { Text = p.RoomNumber, Value = p.Id.ToString() }).ToList();
+            if (Id.HasValue)
+            {
+               RoomBookings EditBooking = db.roomBookings.Find(Id);
+                roombookings.Id = Id.Value;
+                roombookings.CutomerName = EditBooking.CutomerName;
+                roombookings.CutomerAddress = EditBooking.CutomerAddress;
+                roombookings.CutomerPhone = EditBooking.CutomerPhone;
+                roombookings.BookingFrom = EditBooking.BookingFrom;
+                roombookings.BookingTo = EditBooking.BookingTo;
+                roombookings.RoomsId = EditBooking.RoomsId;
+                roombookings.NoOfMeMbers = EditBooking.NoOfMeMbers;
+            }
+
             return PartialView("_Action", roombookings);
         }
 
+
+        [HttpPost]
+        public JsonResult Action(RoomBookings roomBookings,int? Id)
+        {
+            JsonResult json = new JsonResult();
+            bool Result = false;
+
+
+            if (Id.HasValue)
+            {
+                int NumberofDays = Convert.ToInt32((roomBookings.BookingTo - roomBookings.BookingFrom).TotalDays);
+                Rooms objectRoom = db.rooms.Single(model => model.Id == roomBookings.RoomsId);
+                decimal RoomPrice = objectRoom.RoomPrice;
+                decimal TotalPrice = RoomPrice * NumberofDays;
+                roomBookings.TotalAmount = TotalPrice;
+
+                db.Entry(roomBookings).State = EntityState.Modified;
+                Result = db.SaveChanges() > 0;
+            }
+            else
+            {
+                int NumberofDays = Convert.ToInt32((roomBookings.BookingTo - roomBookings.BookingFrom).TotalDays);
+                Rooms objectRoom = db.rooms.Single(model => model.Id == roomBookings.RoomsId);
+                decimal RoomPrice = objectRoom.RoomPrice;
+                decimal TotalPrice = RoomPrice * NumberofDays;
+                roomBookings.TotalAmount = TotalPrice;
+
+                db.roomBookings.Add(roomBookings);
+                Result = db.SaveChanges() > 0;
+            }
+
+
+
+            if (Result)
+            {
+                json.Data = new { Success = true };
+            }
+            else
+            {
+                json.Data= new { Success = false ,Message = "上傳失敗!" };
+            }
+            return json;
+        }
 
         // GET: Dashborad/RoomBookings/Details/5
         public ActionResult Details(int? id)

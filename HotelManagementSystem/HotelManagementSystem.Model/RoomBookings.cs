@@ -15,6 +15,7 @@ namespace HotelManagementSystem.Model
         public int Id { get; set; }
         public string CutomerName { get; set; }
         public string CutomerAddress { get; set; }
+        public string CutomerPhone { get; set; }
         public DateTime BookingFrom { get; set; }
         public DateTime BookingTo { get; set; }
         public int RoomsId { get; set; }

@@ -17,11 +17,35 @@
     </div>
     <div class="modal-body">
         <form id="ActionForm">
+
             <input type="hidden" id="RooomId" value="@Model.Id">
-            @Html.LabelFor(p => p.CutomerName)
-            @Html.TextBoxFor(p => p.CutomerName)
+            @Html.LabelFor(p => p.CutomerName, new { @class = "form-label" })
 
+            @Html.TextBoxFor(p => p.CutomerName, new { @class = "form-control", value = Model.CutomerName })
 
+            @Html.LabelFor(p => p.CutomerAddress, new { @class = "form-label" })
+
+            @Html.TextBoxFor(p => p.CutomerAddress, new { @class = "form-control", value = Model.CutomerAddress })
+
+            @Html.LabelFor(p => p.CutomerPhone, new { @class = "form-label" })
+
+            @Html.TextBoxFor(p => p.CutomerPhone, new { @class = "form-control", value = Model.CutomerPhone })
+
+            @Html.LabelFor(p => p.RoomsId, new { @class = "form-label" })
+
+            @Html.DropDownListFor(p => p.RoomsId, Model.rooms, "==請遠擇==", new { @class = "form-control", value = Model.RoomsId })
+
+            @Html.LabelFor(p => p.BookingFrom, new { @class = "form-label"   })
+
+            @Html.TextBoxFor(p => p.BookingFrom, new { @class = "form-control BookDate", value = Model.BookingFrom })
+
+            @Html.LabelFor(p => p.BookingTo, new { @class = "form-label" })
+
+            @Html.TextBoxFor(p => p.BookingTo, new { @class = "form-control BookDate", value = Model.BookingTo })
+
+            @Html.LabelFor(p => p.NoOfMeMbers, new { @class = "form-label" })
+
+            @Html.TextBoxFor(p => p.NoOfMeMbers, new { @class = "form-control", value = Model.NoOfMeMbers })
         </form>
 
     </div>
@@ -30,3 +54,41 @@
         <button id="DataBtn" type="button" class="btn btn-primary">儲存</button>
     </div>
 </div>
+
+<div id="Error">
+
+</div>
+<span class=""></span>
+<script>
+
+    $(document).ready(function () {
+        $(".BookDate").datepicker({
+            dateFormat: "yy-MM-dd",
+            changeMonth: true,
+            changeYear: true,
+            showOn: "button",
+            sideBySide: true,
+            controlType: "select",
+
+        });
+    });
+  
+   
+
+
+    $("#DataBtn").click(function () {
+        $.ajax({
+            url: "@Url.Action("Action","RoomBookings")",
+            type: "post",
+            data: $("#ActionForm").serialize(),
+        }).done(function (respone) {
+            debugger;
+            if (respone.Success) {
+                location.reload();
+            } else {
+                $("#Error").html(respone.Message);
+            }
+        })
+    })
+
+</script>
